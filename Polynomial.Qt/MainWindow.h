@@ -1,15 +1,27 @@
-#pragma once
+#ifndef MAINWINDOW_H
+#define MAINWINDOW_H
 
-#include <QtWidgets/QMainWindow>
-#include "ui_MainWindow.h"
+#include <QMainWindow>
+#define POLYNOMIAL_NOLIB 1
+#include "..\Polynomial.Dll\Polynomial.h"
+
+QT_BEGIN_NAMESPACE
+namespace Ui { class MainWindow; }
+QT_END_NAMESPACE
 
 class MainWindow : public QMainWindow
 {
-	Q_OBJECT
+    Q_OBJECT
 
 public:
-	MainWindow(QWidget *parent = Q_NULLPTR);
+    MainWindow(QWidget *parent = nullptr);
+    ~MainWindow();
+
+public slots:
+    void calculate();
 
 private:
-	Ui::MainWindowClass ui;
+    Ui::MainWindow *ui;
+    Polynomial::Dll::Polynomial poly;
 };
+#endif // MAINWINDOW_H

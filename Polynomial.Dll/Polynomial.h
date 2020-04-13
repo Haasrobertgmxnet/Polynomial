@@ -1,13 +1,13 @@
 #pragma once
 
+#ifdef POLYNOMIAL_NOLIB
+#define POLYNOMIAL_API
+#else
 #ifdef POLYNOMIAL_EXPORTS
 #define POLYNOMIAL_API __declspec(dllexport)
 #else
 #define POLYNOMIAL_API __declspec(dllimport)
 #endif
-
-#ifdef POLYNOMIAL_NOLIB
-#define POLYNOMIAL_API
 #endif
 
 //all math stuff
