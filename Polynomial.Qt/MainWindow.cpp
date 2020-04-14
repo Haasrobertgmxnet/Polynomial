@@ -31,8 +31,9 @@ MainWindow::~MainWindow()
 
 void MainWindow::calculate(){
 
-    std::vector<cplx> v{ cplx(0.0,0.0), cplx(0.0,0.0), cplx(0.0,0.0), cplx(0.0,0.0), cplx(0.0,0.0) };
-    poly.Create<CreateArg::Coefficients>(v);
+    //std::vector<cplx> v{ cplx(0.0,0.0), cplx(0.0,0.0), cplx(0.0,0.0), cplx(0.0,0.0), cplx(0.0,0.0) };
+    Polynomial::Dll::Polynomial poly;
+    poly.Create(4);
 
     poly.Coefficients.at(4).real(QVariant(ui->lineEdit->text()).toDouble());
     poly.Coefficients.at(4).imag(QVariant(ui->lineEdit_2->text()).toDouble());
@@ -51,7 +52,7 @@ void MainWindow::calculate(){
 
 
     poly.FindRoots();
-    //poly.ValidateRoots();
+    poly.ValidateRoots();
 
     std::string sRoot1= std::to_string(poly.Roots.at(0).real()) + "+" + std::to_string(poly.Roots.at(0).imag()) + "i";
     std::string sRoot2= std::to_string(poly.Roots.at(1).real()) + "+" + std::to_string(poly.Roots.at(1).imag()) + "i";

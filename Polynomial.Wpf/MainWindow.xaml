@@ -6,35 +6,70 @@
         xmlns:local="clr-namespace:Polynomial.Wpf"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*" />
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="1*" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
-        </Grid.RowDefinitions>
-        <Label TextElement.FontSize="24" Content="Löser für eine Gleichung vierten Grades." />
-        <Button Grid.Row="6" Content="Löse!" Padding="20" Click="Button_Click" />
-        <TextBox x:Name="txtBox1" PreviewTextInput="NumberValidationTextBox" Grid.ColumnSpan="2" Grid.Column="1" AcceptsReturn="True" HorizontalAlignment="Left" Height="23" Margin="40,20,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txtBox2" PreviewTextInput="NumberValidationTextBox" Grid.ColumnSpan="2" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="40,20,0,0" Grid.Row="2" TextWrapping="Wrap" Text="2" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txtBox3" PreviewTextInput="NumberValidationTextBox" Grid.ColumnSpan="2" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="40,20,0,0" Grid.Row="3" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txtBox4" PreviewTextInput="NumberValidationTextBox" Grid.ColumnSpan="2" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="40,20,0,0" Grid.Row="4" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txtBox5" PreviewTextInput="NumberValidationTextBox" Grid.ColumnSpan="2" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="40,20,0,0" Grid.Row="5" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+    <StackPanel>
+        <Label TextElement.FontSize="24" Content="Löser für eine Gleichung vierten Grades" />
+        <Label TextElement.FontSize="20" Content="A*z^4+B*z^3+C*z^2+D*z^1+E*z^0=0" />
+        <Grid x:Name="InputCoefficients">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            
+            <Label Grid.Row="0">Koeffizient vor z^4: </Label>
+            <Label Grid.Row="0" Grid.Column="1">Realteil:</Label>
+            <Label Grid.Row="0" Grid.Column="3">Imaginärteil:</Label>
+            <TextBox Grid.Row="0" Grid.Column="2" x:Name="coefficientARe" local:NumericTextBox.IsEnabled="True" Text="0,0" Grid.ColumnSpan="2" AcceptsReturn="True" HorizontalAlignment="Left" Height="23" Margin="4" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <TextBox Grid.Row="0" Grid.Column="4" x:Name="coefficientAIm" local:NumericTextBox.IsEnabled="True" Text="0,0" Grid.ColumnSpan="2" AcceptsReturn="True" HorizontalAlignment="Left" Height="23" Margin="4" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
 
-        <TextBox Grid.ColumnSpan="2" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="40,20,0,0" Grid.Row="1" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox Grid.ColumnSpan="2" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="40,20,0,0" Grid.Row="2" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox Grid.ColumnSpan="2" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="40,20,0,0" Grid.Row="3" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox Grid.ColumnSpan="2" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="40,20,0,0" Grid.Row="4" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox Grid.ColumnSpan="2" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="40,20,0,0" Grid.Row="5" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+            <Label Grid.Row="1">Koeffizient vor z^3:</Label>
+            <Label Grid.Row="1" Grid.Column="1">Realteil:</Label>
+            <Label Grid.Row="1" Grid.Column="3">Imaginärteil:</Label>
+            <TextBox Grid.Row="1" Grid.Column="2" x:Name="coefficientBRe" local:NumericTextBox.IsEnabled="True" Text="0,0" AcceptsReturn="True" HorizontalAlignment="Left" Height="23" Margin="4" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <TextBox Grid.Row="1" Grid.Column="4" x:Name="coefficientBIm" local:NumericTextBox.IsEnabled="True" Text="0,0" Grid.ColumnSpan="2" AcceptsReturn="True" HorizontalAlignment="Left" Height="23" Margin="4" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
 
-        
-    </Grid>
+            <Label Grid.Row="2">Koeffizient vor z^2:</Label>
+            <Label Grid.Row="2" Grid.Column="1">Realteil:</Label>
+            <Label Grid.Row="2" Grid.Column="3">Imaginärteil:</Label>
+            <TextBox Grid.Row="2" Grid.Column="2" x:Name="coefficientCRe" local:NumericTextBox.IsEnabled="True" Text="0,0" Grid.ColumnSpan="2" AcceptsReturn="True" HorizontalAlignment="Left" Height="23" Margin="4" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <TextBox Grid.Row="2" Grid.Column="4" x:Name="coefficientCIm" local:NumericTextBox.IsEnabled="True" Text="0,0" AcceptsReturn="True" HorizontalAlignment="Left" Height="23" Margin="4" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+
+            <Label Grid.Row="3">Koeffizient vor z^1:</Label>
+            <Label Grid.Row="3" Grid.Column="1">Realteil:</Label>
+            <Label Grid.Row="3" Grid.Column="3">Imaginärteil:</Label>
+            <TextBox Grid.Row="3" Grid.Column="2" x:Name="coefficientDRe" local:NumericTextBox.IsEnabled="True" Text="0,0" Grid.ColumnSpan="2" AcceptsReturn="True" HorizontalAlignment="Left" Height="23" Margin="4" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <TextBox Grid.Row="3" Grid.Column="4" x:Name="coefficientDIm" local:NumericTextBox.IsEnabled="True" Text="0,0" Grid.ColumnSpan="2" AcceptsReturn="True" HorizontalAlignment="Left" Height="23" Margin="4" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+
+            <Label Grid.Row="4">Koeffizient vor z^0:</Label>
+            <Label Grid.Row="4" Grid.Column="1">Realteil:</Label>
+            <Label Grid.Row="4" Grid.Column="3">Imaginärteil:</Label>
+            <TextBox Grid.Row="4" Grid.Column="2" x:Name="coefficientERe" local:NumericTextBox.IsEnabled="True" Text="0,0" Grid.ColumnSpan="2" AcceptsReturn="True" HorizontalAlignment="Left" Height="23" Margin="4" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <TextBox Grid.Row="4" Grid.Column="4" x:Name="coefficientEIm" local:NumericTextBox.IsEnabled="True" Text="0,0" Grid.ColumnSpan="2" AcceptsReturn="True" HorizontalAlignment="Left" Height="23" Margin="4" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+
+        </Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <Button Grid.Column="0" Content="Löse mit Random-Daten" Padding="20" Margin="4" Click="Button_Click" />
+            <Button Grid.Column="1" Content="Löse mit eingegebenen Daten" Padding="20" Margin="4" Click="ButtonCalculate_Click" />
+            <Button Grid.Column="2" Content="Programm beenden" Padding="20" Margin="4" Click="ButtonExit_Click"/>
+        </Grid>
+
+    </StackPanel>
+
 </Window>

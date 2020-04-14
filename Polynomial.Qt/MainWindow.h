@@ -22,6 +22,5 @@ public slots:
 
 private:
     Ui::MainWindow *ui;
-    Polynomial::Dll::Polynomial poly;
 };
 #endif // MAINWINDOW_H

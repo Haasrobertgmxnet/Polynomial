@@ -18,24 +18,27 @@ namespace Polynomial {
                 if (abs(B) + abs(C) <= 0.0) {
                     _poly->Roots.emplace_back(0.0);
                     _poly->Roots.emplace_back(0.0);
+                    _poly->RootsCalculated = true;
                     return;
                 }
 
                 if (abs(B) <= 0.0) {
                     _poly->Roots.emplace_back((+sqrt(C)) / A);
                     _poly->Roots.emplace_back((-sqrt(C)) / A);
+                    _poly->RootsCalculated = true;
                     return;
                 }
 
                 if (abs(C) <= 0.0) {
                     _poly->Roots.emplace_back(0.0);
                     _poly->Roots.emplace_back(-B / A);
+                    _poly->RootsCalculated = true;
                     return;
                 }
 
                 _poly->Roots.emplace_back((-B + sqrt(B * B - 4.0 * A * C)) / (2.0 * A));
                 _poly->Roots.emplace_back((-B - sqrt(B * B - 4.0 * A * C)) / (2.0 * A));
-
+                _poly->RootsCalculated = true;
             }
 
             void CardanoMethod(Polynomial* _poly) {
@@ -57,6 +60,7 @@ namespace Polynomial {
                     _poly->Roots.emplace_back(0.0);
                     _poly->Roots.emplace_back(0.0);
                     _poly->Roots.emplace_back(0.0);
+                    _poly->RootsCalculated = true;
                     return;
                 }
 
@@ -64,16 +68,15 @@ namespace Polynomial {
                     _poly->Roots.emplace_back(0.0);
 
                     //aux poly of deg 2
-                    std::vector<cplx> tmpCoeffs;
-                    tmpCoeffs.emplace_back(C);
-                    tmpCoeffs.emplace_back(B);
-                    tmpCoeffs.emplace_back(A);
                     Polynomial tmp;
-                    //tmp.Create<CreateArg::Coefficients>(tmpCoeffs);
-                    tmp.CreateFromCoefficients(tmpCoeffs);
+                    tmp.Create(2);
+                    tmp.Coefficients.emplace_back(C);
+                    tmp.Coefficients.emplace_back(B);
+                    tmp.Coefficients.emplace_back(A);
                     tmp.FindRoots();
                     _poly->Roots.emplace_back(tmp.Roots.at(0));
                     _poly->Roots.emplace_back(tmp.Roots.at(1));
+                    _poly->RootsCalculated = true;
                     return;
                 }
 
@@ -99,11 +102,13 @@ namespace Polynomial {
                 _poly->Roots.emplace_back(u - B / 3.0);
                 _poly->Roots.emplace_back((-u + sqrt(3.0) * v * cplx(0.0, 1.0)) / 2.0 - B / 3.0);
                 _poly->Roots.emplace_back((-u - sqrt(3.0) * v * cplx(0.0, 1.0)) / 2.0 - B / 3.0);
-
+                _poly->RootsCalculated = true;
             }
 
             void FerrariMethod(Polynomial* _poly) {
-                cplx A{ _poly->Coefficients.at(3) };
+
+                //Prepare Coefficients
+                cplx A{ _poly->Coefficients.at(4) };
                 if (abs(A) <= 0.0) {
                     return;
                 }
@@ -118,33 +123,59 @@ namespace Polynomial {
                 cplx D{ _poly->Coefficients.at(1) };
                 cplx E{ _poly->Coefficients.at(0) };
 
+                //Case 1: Only A is nonzero
                 if (abs(B) + abs(C) + abs(D) + abs(E) <= 0.0) {
                     _poly->Roots.emplace_back(0.0);
                     _poly->Roots.emplace_back(0.0);
                     _poly->Roots.emplace_back(0.0);
                     _poly->Roots.emplace_back(0.0);
+                    _poly->RootsCalculated = true;
                     return;
                 }
 
+                //Case 2: Only A and E are nonzero
+                if (abs(B) + abs(C) + abs(D) <= 0.0) {
+                    cplx primRoot{ pow(-E,1.0 / 4.0) };
+                    auto Root1 = cplx(0.0, 1.0) * primRoot;
+                    auto Root2 = -primRoot;
+                    _poly->Roots.emplace_back(Root1);
+                    _poly->Roots.emplace_back(Root2);
+                    _poly->Roots.emplace_back(-Root1);
+                    _poly->Roots.emplace_back(-Root2);
+                    _poly->RootsCalculated = true;
+                    return;
+                }
+
+                //Case 3: E is zero. One zero root and a remaining cubic poly to solve
                 if (abs(E) <= 0.0) {
                     _poly->Roots.emplace_back(0.0);
 
-                    //aux poly of deg 3
-                    std::vector<cplx> tmpCoeffs;
-                    tmpCoeffs.emplace_back(D);
-                    tmpCoeffs.emplace_back(C);
-                    tmpCoeffs.emplace_back(B);
-                    tmpCoeffs.emplace_back(A);
+                    //aux poly of deg 3                   
                     Polynomial tmp;
-                    //tmp.Create<CreateArg::Coefficients>(tmpCoeffs);
-                    tmp.CreateFromCoefficients(tmpCoeffs);
+                    tmp.Create(3);
+                    tmp.Coefficients.at(0) = D;
+                    tmp.Coefficients.at(1) = C;
+                    tmp.Coefficients.at(2) = B;
+                    tmp.Coefficients.at(3) = A;
                     tmp.FindRoots();
                     _poly->Roots.emplace_back(tmp.Roots.at(0));
                     _poly->Roots.emplace_back(tmp.Roots.at(1));
-                    _poly->Roots.emplace_back(tmp.Roots.at(3));
+                    _poly->Roots.emplace_back(tmp.Roots.at(2));
+                    _poly->RootsCalculated = true;
                     return;
                 }
 
+                //Case 4: Equation has the form (z-z0)^4 == 0
+                auto z0{ -B / 4.0 };
+                if (abs(C - 6.0 * z0 * z0) + abs(D + 4.0 * z0 * z0 * z0) + abs(E - z0 * z0 * z0 * z0) <= 0.0) {
+                    _poly->Roots.emplace_back(z0);
+                    _poly->Roots.emplace_back(z0);
+                    _poly->Roots.emplace_back(z0);
+                    _poly->Roots.emplace_back(z0);
+                    return;
+                }
+
+                //Case 5: Default and general case
                 auto p{ (8.0 * A * C - 3.0 * B * B) / (8.0 * A * A) };
                 auto q{ 12.0 * A * E - 3.0 * B * D + C * C };
                 auto s{ 27.0 * A * D * D - 72.0 * A * C * E + 27.0 * B * B * E - 9.0 * B * C * D + 2.0 * C * C * C };
@@ -156,50 +187,29 @@ namespace Polynomial {
                 _poly->Roots.emplace_back(-B / (4.0 * A) - Q - 1 / 2.0 * sqrt(-4.0 * Q * Q - 2.0 * p + SvsQ));
                 _poly->Roots.emplace_back(-B / (4.0 * A) + Q + 1 / 2.0 * sqrt(-4.0 * Q * Q - 2.0 * p - SvsQ));
                 _poly->Roots.emplace_back(-B / (4.0 * A) + Q - 1 / 2.0 * sqrt(-4.0 * Q * Q - 2.0 * p - SvsQ));
+                _poly->RootsCalculated = true;
 
             }
         }
 
-        template<CreateArg arg>
-        void Polynomial::Create(std::vector<cplx>) {
-        }
+        void Polynomial::Create(unsigned int _deg) {
+            Degree = _deg;
+            Coefficients.reserve(Degree + 1);
+            Roots.reserve(Degree);
+            if (Degree == 2) {
+                FindRoots = [this]() { PolynomialRoots::MidNightFormula(this); };
+            }
+            if (Degree == 3) {
+                FindRoots = [this]() { PolynomialRoots::CardanoMethod(this); };
+            }
+            if (Degree == 4) {
+                FindRoots = [this]() { PolynomialRoots::FerrariMethod(this); };
+            }
 
-        template<>
-        void Polynomial::Create<CreateArg::Coefficients>(std::vector<cplx> _coefficients) {
-            CreateFromCoefficients(_coefficients);
-        }
-        void Polynomial::CreateFromCoefficients(std::vector<cplx> _coefficients) {
-            unsigned int deg{ 0 };
-            for (auto& elem : _coefficients) {
-                Coefficients.emplace_back(elem);
-                deg++;
+            for (auto j = 0; j < Degree; ++j) {
+                Coefficients.push_back(cplx(0.0, 0.0));
             }
-            auto elem = Coefficients.back();
-            while (abs(elem.real()) + abs(elem.imag()) <= 0.0) {
-                deg--;
-                Coefficients.erase(Coefficients.end() - 1);
-                elem = Coefficients.back();
-            }
-            Type = static_cast<PolyType>(--deg);
-            if (Type == PolyType::Quadratic) {
-                FindRoots = [this]() { std::cout << "Solve PolyType::Quadratic" << std::endl; PolynomialRoots::MidNightFormula(this); };
-            }
-            if (Type == PolyType::Cubic) {
-                FindRoots = [this]() { std::cout << "Solve PolyType::Cubic" << std::endl; PolynomialRoots::CardanoMethod(this); };
-            }
-            if (Type == PolyType::Quartic) {
-                FindRoots = [this]() { std::cout << "Solve PolyType::Quartic" << std::endl; PolynomialRoots::FerrariMethod(this); };
-            }
-        }
-
-        template<>
-        void Polynomial::Create<CreateArg::Roots>(std::vector<cplx> _roots) {
-            size_t numberOfRoots{ _roots.size() };
-            std::vector<cplx> tmp;
-            for (auto& elem : _roots) {
-                tmp.emplace_back(-1.0 * elem);
-            }
-            //implement Vieta's theorem
+            Coefficients.push_back(cplx(0.0, 0.0));
         }
 
         void Polynomial::ValidateRoots() {
@@ -225,7 +235,10 @@ namespace Polynomial {
             auto B{ -(z.at(0) + z.at(1) + z.at(2) + z.at(3)) };
             auto C{ +(z.at(0) * z.at(1) + z.at(0) * z.at(2) + z.at(0) * z.at(3)
                 + z.at(1) * z.at(2) + z.at(1) * z.at(3) + z.at(2) * z.at(3)) };
-            auto D{ -(z.at(0) * z.at(1) * z.at(2) + z.at(0) * z.at(2) * z.at(3) + z.at(1) * z.at(2) * z.at(3)) };
+            auto D{ -(z.at(0) * z.at(1) * z.at(2) + 
+                z.at(0) * z.at(1) * z.at(3) + 
+                z.at(0) * z.at(2) * z.at(3) +
+                z.at(1) * z.at(2) * z.at(3)) };
             auto E{ +(z.at(0) * z.at(1) * z.at(2) * z.at(3)) };
 
             B = cplx(A->real(), A->imag()) * B;
@@ -233,12 +246,8 @@ namespace Polynomial {
             D = cplx(A->real(), A->imag()) * D;
             E = cplx(A->real(), A->imag()) * E;
 
-            unsigned int ofs{ static_cast<unsigned int>(Type) };
+            int ofs{ Degree };
             ResultError = abs(w.at(ofs - 1) - E) + abs(w.at(ofs) - D) + abs(w.at(1 + ofs) - C) + abs(w.at(2 + ofs) - B);
         }
     }
-
-
-
-
 }

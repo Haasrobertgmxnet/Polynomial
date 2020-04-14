@@ -92,6 +92,11 @@
   <ItemGroup>
     <QtRcc Include="MainWindow.qrc" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Polynomial.Dll\Polynomial.Dll.vcxproj">
+      <Project>{bd75eae2-9110-4d19-9d0a-9624bc354214}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
     <Import Project="$(QtMsBuild)\qt.targets" />

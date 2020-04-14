@@ -4,8 +4,12 @@
 Polynomial::Dll::CLI::Polynomial::Polynomial(double _are, double _aim, double _bre, double _bim, double _cre, double _cim, double _dre, double _dim, double _ere, double _eim)
 {
 	_impl = new Dll::Polynomial();
-	std::vector<cplx> v{ cplx(_are, _aim), cplx(_bre, _bim), cplx(_cre, _cim), cplx(_dre, _dim), cplx(_ere, _eim) };
-	_impl->Create<CreateArg::Coefficients>(v);
+	_impl->Create(4);
+	_impl->Coefficients.at(0) = cplx(_ere, _eim);
+	_impl->Coefficients.at(1) = cplx(_dre, _dim);
+	_impl->Coefficients.at(2) = cplx(_cre, _cim);
+	_impl->Coefficients.at(3) = cplx(_bre, _bim);
+	_impl->Coefficients.at(4) = cplx(_are, _aim);
 }
 
 Polynomial::Dll::CLI::Polynomial::~Polynomial()

@@ -27,7 +27,7 @@ FORMS += \
     MainWindow.ui
 
 TRANSLATIONS += \
-    SolveQuarticEquation_de_DE.ts
+    PolynomialQt_de_DE.ts
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

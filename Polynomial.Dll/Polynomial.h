@@ -22,7 +22,7 @@ const double Pi = 3.1415926535;
 
 using cplx = std::complex<double>;
 
-enum class PolyType : unsigned int { Constant = 0, Linear = 1, Quadratic = 2, Cubic = 3, Quartic = 4, Any };
+enum class PolyType : int { NotDefined = -1, Constant = 0, Linear = 1, Quadratic = 2, Cubic = 3, Quartic = 4, Any };
 enum class CreateArg : unsigned int { Coefficients, Roots };
 
 namespace Polynomial {
@@ -30,16 +30,17 @@ namespace Polynomial {
         class POLYNOMIAL_API Polynomial
         {
         public:
-            template<CreateArg arg>
-            void Create(std::vector<cplx>);
-            void CreateFromCoefficients(std::vector<cplx>);
+            void Create(unsigned int _deg);
 
             void ValidateRoots();
 
+            std::function<void()> FindRoots{ nullptr };
+
+            int Degree{ -1 };
             std::vector <cplx> Coefficients;
             std::vector <cplx> Roots;
-            PolyType Type{ PolyType::Any };
-            std::function<void()> FindRoots{ nullptr };
+
+
             bool RootsCalculated{ false };
 
             cplx Discriminant;
@@ -48,7 +49,6 @@ namespace Polynomial {
             double ResultError{ DBL_MAX };
         };
     }
-
 }
 
 
