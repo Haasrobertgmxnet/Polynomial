@@ -68,8 +68,8 @@ namespace Polynomial {
 					_poly->Roots.emplace_back(0.0);
 
 					//aux poly of deg 2
-					Polynomial tmp(2);
-					//tmp.Create(2);
+					Polynomial tmp;
+					tmp.Create(2);
 					tmp.Coefficients.emplace_back(C);
 					tmp.Coefficients.emplace_back(B);
 					tmp.Coefficients.emplace_back(A);
@@ -152,8 +152,8 @@ namespace Polynomial {
 					_poly->Roots.emplace_back(0.0);
 
 					//aux poly of deg 3                   
-					Polynomial tmp(3);
-					//tmp.Create(3);
+					Polynomial tmp;
+					tmp.Create(3);
 					tmp.Coefficients.at(0) = D;
 					tmp.Coefficients.at(1) = C;
 					tmp.Coefficients.at(2) = B;
