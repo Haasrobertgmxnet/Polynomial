@@ -1,17 +1,15 @@
 #include <Python.h>
 #include <map>
-//#include <array>
 
-#undef POLYNOMIAL_NOLIB
 #define VC9_PYTHON27
-#include <C:\Users\Robert\source\repos\Polynomial\Polynomial.Dll\Polynomial.h>
+//#include "..\Polynomial.Core\Polynomial.h"
+#include <C:\Users\Robert\source\repos\Polynomial\Polynomial.Core\Polynomial.h>
 
 static PyObject*
 calculateRoots(PyObject* self, PyObject* args)
 {
     Py_complex defaultVal;
     defaultVal.real = 0.0;
-    //defaultVal.imag = 0.0;
 
     std::map<char, Py_complex> coeffs;
     coeffs['A'].real = 0.0;
@@ -28,14 +26,14 @@ calculateRoots(PyObject* self, PyObject* args)
         &coeffs['E']))
         return NULL;
 
-    Polynomial::Dll::Polynomial poly(4);
+    Polynomial::Core::Polynomial poly;
     //poly.Create(4);
 
-    for (int j = 0; j < 5; ++j) {
-        char c = static_cast<char>(65 + j);
-        poly.Coefficients[j].real(coeffs[c].real);
-        poly.Coefficients[j].imag(coeffs[c].imag);
-    }
+    //for (int j = 0; j < 5; ++j) {
+    //    char c = static_cast<char>(65 + j);
+    //    poly.Coefficients[j].real(coeffs[c].real);
+    //    poly.Coefficients[j].imag(coeffs[c].imag);
+    //}
 
     //poly.FindRoots();
     //poly.ValidateRoots();
@@ -45,8 +43,8 @@ calculateRoots(PyObject* self, PyObject* args)
     Py_complex results[4];
 
     for (unsigned int j = 0; j < 4; ++j) {
-        results[j].real = poly.Roots[j].real();
-        results[j].imag = poly.Roots[j].imag();
+        results[j].real = 0.1;// poly.Roots[j].real();
+        results[j].imag = 0.1;// poly.Roots[j].imag();
     }
 
     PyObject* tuple;
