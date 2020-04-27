@@ -68,14 +68,14 @@ namespace Polynomial {
 					_poly->Roots.push_back(0.0);
 
 					//aux poly of deg 2
-					Polynomial tmp;
-					tmp.Create(2);
-					tmp.Coefficients.push_back(C);
-					tmp.Coefficients.push_back(B);
-					tmp.Coefficients.push_back(A);
-					tmp.FindRoots();
-					_poly->Roots.push_back(tmp.Roots[0]);
-					_poly->Roots.push_back(tmp.Roots[1]);
+					Polynomial tmp2;
+					tmp2.Create(2);
+					tmp2.Coefficients[0] = C;
+					tmp2.Coefficients[1] = B;
+					tmp2.Coefficients[2] = A;
+					tmp2.FindRoots();
+					_poly->Roots.push_back(tmp2.Roots[0]);
+					_poly->Roots.push_back(tmp2.Roots[1]);
 					_poly->RootsCalculated = true;
 					return 0;
 				}
@@ -155,16 +155,16 @@ namespace Polynomial {
 					_poly->Roots.push_back(0.0);
 
 					//aux poly of deg 3                   
-					Polynomial tmp;
-					tmp.Create(3);
-					tmp.Coefficients[0] = D;
-					tmp.Coefficients[1] = C;
-					tmp.Coefficients[2] = B;
-					tmp.Coefficients[3] = A;
-					tmp.FindRoots();
-					_poly->Roots.push_back(tmp.Roots.at(0));
-					_poly->Roots.push_back(tmp.Roots.at(1));
-					_poly->Roots.push_back(tmp.Roots.at(2));
+					Polynomial tmp3;
+					tmp3.Create(3);
+					tmp3.Coefficients[0] = D;
+					tmp3.Coefficients[1] = C;
+					tmp3.Coefficients[2] = B;
+					tmp3.Coefficients[3] = A;
+					tmp3.FindRoots();
+					_poly->Roots.push_back(tmp3.Roots.at(0));
+					_poly->Roots.push_back(tmp3.Roots.at(1));
+					_poly->Roots.push_back(tmp3.Roots.at(2));
 					_poly->RootsCalculated = true;
 					return 0;
 				}

@@ -1,13 +1,17 @@
 #include "Polynomial.h"
 #include "PolynomialRoots.h"
+#include <iostream>
 
-namespace Polynomial {
-	namespace Core {
 #ifdef VC9_PYTHON27
 #include <limits.h>
 #ifndef DBL_MAX
 #define DBL_MAX 1.7976931348623158e+308
 #endif
+#endif
+
+namespace Polynomial {
+	namespace Core {
+#ifdef VC9_PYTHON27
 		Polynomial::RootsObject::RootsObject(Polynomial* _parent)
 		{
 			parent = _parent;
@@ -32,7 +36,6 @@ namespace Polynomial {
 			Coefficients.reserve(Degree + 1);
 			Roots.reserve(Degree);
 
-			Degree = -1;
 			RootsCalculated = false;
 			ResultError = DBL_MAX;
 			RootsObject ro(this);
