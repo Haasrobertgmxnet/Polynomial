@@ -72,44 +72,22 @@ namespace Polynomial {
 #endif
 
 		void Polynomial::ValidateRoots() {
-			std::vector<cplx> z;
-			z.reserve(4);
-			for (unsigned int j = 0; j < Roots.size(); j++) {
-				z.push_back(Roots[j]);
+			if (RootsCalculated) {
+				// This will store the Coefficients in reverse order
+				// The leding coefficient is assumed to be 1 and not stored here
+				std::vector<cplx> FlippedCoefficients;
+				// But first, the calculated roots will be stored here
+				// to apply Vieta's theorem
+				for (std::vector<cplx>::iterator it = Roots.begin(); it != Roots.end();++it) {
+					FlippedCoefficients.push_back(-1.0*(*it));
+				}
+				FlippedCoefficients = PolynomialRoots::Vieta(FlippedCoefficients);
+				ResultError = 0.0;
+				for (unsigned int j = 1; j <= FlippedCoefficients.size();++j) {
+					unsigned int idx = FlippedCoefficients.size() - j;
+					ResultError += abs(FlippedCoefficients[j - 1] - Coefficients[idx]);
+				}
 			}
-			z.resize(4);
-
-			std::vector<cplx> w;
-			w.reserve(8);
-			w.push_back(0.0);
-			w.push_back(0.0);
-			w.push_back(0.0);
-			for (unsigned int j = 0; j < Coefficients.size(); j++) {
-				w.push_back(Coefficients[j]);
-			}
-			w.resize(8);
-
-			//implement Vieta's theorem
-			//std::_Vector_iterator<std::_Vector_val<std::_Simple_types<cplx>>> A = Coefficients.end() - 1;
-			//typename std::iterator_traits<std::vector<cplx>>::value_type A = *(Coefficients.end() - 1;
-			cplx A = Coefficients[Coefficients.size() - 1];
-			cplx B = -(z[0] + z[1] + z[2] + z[3]);
-			cplx C = +(z[0] * z[1] + z[0] * z[2] + z[0] * z[3]
-				+ z[1] * z[2] + z[1] * z[3] + z[2] * z[3]);
-			cplx D = -(z[0] * z[1] * z[2] +
-				z[0] * z[1] * z[3] +
-				z[0] * z[2] * z[3] +
-				z[1] * z[2] * z[3]);
-			cplx E = +(z[0] * z[1] * z[2] * z[3]);
-
-			B = cplx(A.real(), A.imag()) * B;
-			C = cplx(A.real(), A.imag()) * C;
-			D = cplx(A.real(), A.imag()) * D;
-			E = cplx(A.real(), A.imag()) * E;
-
-			int ofs = Degree;
-			ResultError = abs(w[ofs - 1] - E) + abs(w[ofs] - D) + abs(w[1 + ofs] - C) + abs(w[2 + ofs] - B);
 		}
-
 	}
 }

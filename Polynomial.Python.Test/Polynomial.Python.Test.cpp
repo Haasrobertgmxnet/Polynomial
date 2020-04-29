@@ -23,6 +23,7 @@ int main()
     }
 
     poly.FindRoots();
+    poly.ValidateRoots();
 
     if (!poly.RootsCalculated) {
         std::cout << "Roots could not be calculated!" << std::endl;

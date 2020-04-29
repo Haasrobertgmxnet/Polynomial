@@ -5,6 +5,29 @@ namespace Polynomial {
 	namespace Core {
 
 		namespace PolynomialRoots {
+
+			// Calculate polynomial coefficientes from
+			// calculated roots via Vieta's theorem
+			// This is the helper function
+			std::vector<cplx> Vieta(std::vector<cplx> w) {
+				std::vector<cplx> result;
+				if (w.size() == 1) {
+					return w;
+				}
+
+				cplx lastElem = w[w.size() - 1];
+				w.erase(w.end() - 1);
+				w = Vieta(w);
+
+				result.push_back(+(*w.begin()) + lastElem);
+				std::vector<cplx>::iterator it = w.begin();
+				for (it = 1 + w.begin(); it != w.end(); ++it) {
+					result.push_back(*it + *(it - 1) * lastElem);
+				}
+				result.push_back(*(it - 1) * lastElem);
+				return result;
+			}
+
 			int MidNightFormula(Polynomial* _poly) {
 				cplx A = _poly->Coefficients[2];
 				cplx B = _poly->Coefficients[1];
@@ -176,6 +199,7 @@ namespace Polynomial {
 					_poly->Roots.push_back(z0);
 					_poly->Roots.push_back(z0);
 					_poly->Roots.push_back(z0);
+					_poly->RootsCalculated = true;
 					return 0;
 				}
 

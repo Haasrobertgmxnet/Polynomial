@@ -146,8 +146,8 @@ Global
 		{AAC9B067-A66E-48D7-A650-936A9146D0B3}.Debug_Python|Any CPU.ActiveCfg = Debug_Python|Win32
 		{AAC9B067-A66E-48D7-A650-936A9146D0B3}.Debug_Python|x64.ActiveCfg = Debug_Python|x64
 		{AAC9B067-A66E-48D7-A650-936A9146D0B3}.Debug_Python|x64.Build.0 = Debug_Python|x64
-		{AAC9B067-A66E-48D7-A650-936A9146D0B3}.Debug_Python|x86.ActiveCfg = Debug_Python|Win32
-		{AAC9B067-A66E-48D7-A650-936A9146D0B3}.Debug_Python|x86.Build.0 = Debug_Python|Win32
+		{AAC9B067-A66E-48D7-A650-936A9146D0B3}.Debug_Python|x86.ActiveCfg = Debug|Win32
+		{AAC9B067-A66E-48D7-A650-936A9146D0B3}.Debug_Python|x86.Build.0 = Debug|Win32
 		{AAC9B067-A66E-48D7-A650-936A9146D0B3}.Debug|Any CPU.ActiveCfg = Debug|Win32
 		{AAC9B067-A66E-48D7-A650-936A9146D0B3}.Debug|x64.ActiveCfg = Debug|x64
 		{AAC9B067-A66E-48D7-A650-936A9146D0B3}.Debug|x64.Build.0 = Debug|x64
