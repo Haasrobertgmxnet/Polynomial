@@ -1,8 +1,11 @@
+#ifdef NDEBUG
+// Only Release-Build should be built
+// Debug-Build produces a LNK1104 linker error missing python27_d.lib
 #include <Python.h>
 #include <map>
 
-#define VC9_PYTHON27
-#include <C:\Users\Robert\source\repos\Polynomial\Polynomial.Core\Polynomial.h>
+//#include <C:\Users\Robert\source\repos\Polynomial\Polynomial.Core\Polynomial.h>
+#include "..\Polynomial.Core\Polynomial.h"
 
 static PyObject*
 calculateRoots(PyObject* self, PyObject* args)
@@ -61,3 +64,4 @@ initcalcrootsmodule(void)
     (void)Py_InitModule("calcrootsmodule", PolyMethods);
 }
 
+#endif

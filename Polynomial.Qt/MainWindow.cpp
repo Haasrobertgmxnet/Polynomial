@@ -5,6 +5,8 @@
 #include "MainWindow.h"
 #include "ui_MainWindow.h"
 
+#include "..\Polynomial.Core\Polynomial.h"
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)

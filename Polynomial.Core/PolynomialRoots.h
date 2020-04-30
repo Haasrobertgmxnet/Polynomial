@@ -1,4 +1,5 @@
 #pragma once
+
 #include "Polynomial.h"
 
 namespace Polynomial {
@@ -28,7 +29,28 @@ namespace Polynomial {
 				return result;
 			}
 
-			int MidNightFormula(Polynomial* _poly) {
+			template<typename T>
+			int ValidateRoots(T* _poly) {
+				if (_poly->RootsCalculated) {
+					// This will store the Coefficients in reverse order
+					// The leading coefficient is assumed to be 1 and not stored here
+					std::vector<cplx> FlippedCoefficients;
+					// But first, the calculated roots will be stored here
+					// to apply Vieta's theorem
+					for (std::vector<cplx>::iterator it = _poly->Roots.begin(); it != _poly->Roots.end(); ++it) {
+						FlippedCoefficients.push_back(-1.0 * (*it));
+					}
+					FlippedCoefficients = Vieta(FlippedCoefficients);
+					_poly->ResultError = 0.0;
+					for (unsigned int j = 1; j <= FlippedCoefficients.size(); ++j) {
+						unsigned int idx = FlippedCoefficients.size() - j;
+						_poly->ResultError += abs(FlippedCoefficients[j - 1] - _poly->Coefficients[idx]);
+					}
+				}
+			}
+
+			template<typename T>
+			int MidNightFormula(T* _poly) {
 				cplx A = _poly->Coefficients[2];
 				cplx B = _poly->Coefficients[1];
 				cplx C = _poly->Coefficients[0];
@@ -64,7 +86,8 @@ namespace Polynomial {
 				return 0;
 			}
 
-			int CardanoMethod(Polynomial* _poly) {
+			template<typename T>
+			int CardanoMethod(T* _poly) {
 				cplx A = _poly->Coefficients[3];
 				if (abs(A) <= 0.0) {
 					return -1;
@@ -112,7 +135,7 @@ namespace Polynomial {
 				std::vector<cplx> w;
 				w.push_back( - q / 2.0 + sqD);
 				w.push_back( - q / 2.0 - sqD);
-			//};
+
 				for (int j = 0; j < 2 ;j++ ) {
 					if (abs(w[j].imag()) <= 0.0) {
 						w[j] = ((abs(w[j]) <= 0.0) ? 0.0 : w[j] / abs(w[j])) * pow(abs(w[j]), 1.0 / 3.0);
@@ -132,7 +155,8 @@ namespace Polynomial {
 				return 0;
 			}
 
-			int FerrariMethod(Polynomial* _poly) {
+			template<typename T>
+			int FerrariMethod(T* _poly) {
 
 				//Prepare Coefficients
 				cplx A = _poly->Coefficients[4];

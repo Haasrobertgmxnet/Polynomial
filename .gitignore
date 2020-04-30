@@ -340,3 +340,6 @@ ASALocalRun/
 healthchecksdb
 /Release_Python
 Debug_Python
+Release_Python
+Polynomial.Python.Test
+/Polynomial.Python.Test

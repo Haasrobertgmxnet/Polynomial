@@ -1,9 +1,6 @@
-#include <map>
 #include <iostream>
 
-#define VC9_PYTHON27
-#include "C:\Users\Robert\source\repos\Polynomial\Polynomial.Core\Polynomial.h"
-
+#include "Polynomial.h"
 
 int main()
 {
@@ -18,8 +15,8 @@ int main()
         std::cin >> re;
         std::cout << c << ", Imaginaerteil: ";
         std::cin >> im;
-        poly.Coefficients[4-j].real(re);
-        poly.Coefficients[4-j].imag(im);
+        poly.Coefficients[4 - j].real(re);
+        poly.Coefficients[4 - j].imag(im);
     }
 
     poly.FindRoots();
@@ -30,13 +27,20 @@ int main()
         std::cout << "Program will end now" << std::endl;
         return -1;
     }
-
+    std::cout << std::endl;
+    std::cout << "Calculated Solutions" << std::endl;
+    std::cout << "############################" << std::endl;
+    std::cout << "Result Error: ";
+    std::cout << poly.ResultError << std::endl;
     for (int j = 0; j < 4; ++j) {
         double re = poly.Roots[j].real();
         double im = poly.Roots[j].imag();
-        std::cout << "Realteil: ";
+        std::cout << "############################" << std::endl;
+        std::cout << "Solution " << 1+j << std::endl;
+        std::cout << "----------------------------" << std::endl;
+        std::cout << "Real Part: ";
         std::cout << re << std::endl;
-        std::cout << "Imaginaerteil: ";
+        std::cout << "Imaginary Part: ";
         std::cout << im << std::endl;
     }
 
