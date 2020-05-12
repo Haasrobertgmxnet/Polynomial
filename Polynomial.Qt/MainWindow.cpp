@@ -12,16 +12,16 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->Coeff_A_Re->setText("1.0");
-    ui->Coeff_A_Im->setText("1.0");
-    ui->Coeff_B_Re->setText("1.0");
-    ui->Coeff_B_Im->setText("1.0");
-    ui->Coeff_C_Re->setText("1.0");
-    ui->Coeff_C_Im->setText("1.0");
-    ui->Coeff_D_Re->setText("1.0");
-    ui->Coeff_D_Im->setText("1.0");
-    ui->Coeff_E_Re->setText("1.0");
-    ui->Coeff_E_Im->setText("1.0");
+    for each (auto elem in ui->layoutWidget->children())
+    {
+        auto key{ elem->objectName() };
+        if (!key.contains("Coeff")) {
+            continue;
+        }
+        auto val{ static_cast<QLineEdit*>(elem) };
+        val->setText("1.0");
+    }
+
     connect(ui->pushButton,&QPushButton::clicked,this,&MainWindow::calculate);
     connect(ui->pushButton_2,&QPushButton::clicked,QApplication::instance(),&QApplication::quit);
 
@@ -74,15 +74,17 @@ void MainWindow::calculate(){
     std::string sDelta= std::to_string(poly.Delta.real()) + "+" + std::to_string(poly.Delta.imag()) + "i";
     std::string sQ= std::to_string(poly.Q.real()) + "+" + std::to_string(poly.Q.imag()) + "i";
 
-    QString qs= "Lösungen der Nullstellengleichung\nfür ein komplexes Polynom vierten Grades: \n";
+    QString qs = QStringLiteral("Lösungen der Nullstellengleichung\nfür ein komplexes Polynom vierten Grades: \n");
     for (unsigned int j = 0; j < sRoot.size(); ++j) {
-        qs = qs + "Root" + QString(j) + ": " + QString(sRoot[j].c_str()) + "\n";
+        qs = qs + QStringLiteral("Lösung ") + QString(j+49) + ": " + QString(sRoot[j].c_str()) + "\n";
     }
-    qs= qs + "Result Error: " + QString(sResultError.c_str()) + "\n";
-    qs= qs + "Discriminant: " + QString(sDiscriminant.c_str()) + "\n";
-    qs= qs + "Delta: " + QString(sDelta.c_str()) + "\n";
-    qs= qs + "Q: " + QString(sQ.c_str()) + "\n";
+    qs= qs + "Fehler: " + QString(sResultError.c_str()) + "\n";
+    qs= qs + "Diskriminante: " + QString(sDiscriminant.c_str()) + "\n";
 
     ui->textBrowser->setText(qs);
+
+    
+
+
     qDebug() << "Berechne....";
 }

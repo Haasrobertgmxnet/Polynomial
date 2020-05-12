@@ -9,9 +9,7 @@ namespace Polynomial {
 
 			// Calculate polynomial coefficientes from
 			// calculated roots via Vieta's theorem
-			// This is the helper function
 			std::vector<cplx> Vieta(std::vector<cplx> w) {
-				std::vector<cplx> result;
 				if (w.size() == 1) {
 					return w;
 				}
@@ -19,10 +17,10 @@ namespace Polynomial {
 				cplx lastElem = w[w.size() - 1];
 				w.erase(w.end() - 1);
 				w = Vieta(w);
-
-				result.push_back(+(*w.begin()) + lastElem);
+				std::vector<cplx> result;
 				std::vector<cplx>::iterator it = w.begin();
-				for (it = 1 + w.begin(); it != w.end(); ++it) {
+				result.push_back((*it) + lastElem);
+				for (++it; it != w.end(); ++it) {
 					result.push_back(*it + *(it - 1) * lastElem);
 				}
 				result.push_back(*(it - 1) * lastElem);
@@ -47,6 +45,7 @@ namespace Polynomial {
 						_poly->ResultError += abs(FlippedCoefficients[j - 1] - _poly->Coefficients[idx]);
 					}
 				}
+				return 0;
 			}
 
 			template<typename T>
