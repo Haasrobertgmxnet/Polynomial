@@ -19,6 +19,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Polynomial.Core.Test", "Pol
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Polynomial.Dll.Test", "Polynomial.Dll.Test\Polynomial.Dll.Test.vcxproj", "{331C8D32-6BB3-4EB1-808F-55A59D590E5A}"
 EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Polynomial.Python3.App", "Polynomial.Python3.App\Polynomial.Python3.App.pyproj", "{2BB0E8FB-1D34-435A-AC8D-FAFB57F1284B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Polynomial.Python3", "Polynomial.Python3\Polynomial.Python3.vcxproj", "{165C20BB-DBB3-446F-9E5C-330D84A6682C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -110,6 +114,22 @@ Global
 		{331C8D32-6BB3-4EB1-808F-55A59D590E5A}.Release|x64.Build.0 = Release|x64
 		{331C8D32-6BB3-4EB1-808F-55A59D590E5A}.Release|x86.ActiveCfg = Release|Win32
 		{331C8D32-6BB3-4EB1-808F-55A59D590E5A}.Release|x86.Build.0 = Release|Win32
+		{2BB0E8FB-1D34-435A-AC8D-FAFB57F1284B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BB0E8FB-1D34-435A-AC8D-FAFB57F1284B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{2BB0E8FB-1D34-435A-AC8D-FAFB57F1284B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2BB0E8FB-1D34-435A-AC8D-FAFB57F1284B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BB0E8FB-1D34-435A-AC8D-FAFB57F1284B}.Release|x64.ActiveCfg = Release|Any CPU
+		{2BB0E8FB-1D34-435A-AC8D-FAFB57F1284B}.Release|x86.ActiveCfg = Release|Any CPU
+		{165C20BB-DBB3-446F-9E5C-330D84A6682C}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{165C20BB-DBB3-446F-9E5C-330D84A6682C}.Debug|x64.ActiveCfg = Debug|x64
+		{165C20BB-DBB3-446F-9E5C-330D84A6682C}.Debug|x64.Build.0 = Debug|x64
+		{165C20BB-DBB3-446F-9E5C-330D84A6682C}.Debug|x86.ActiveCfg = Debug|Win32
+		{165C20BB-DBB3-446F-9E5C-330D84A6682C}.Debug|x86.Build.0 = Debug|Win32
+		{165C20BB-DBB3-446F-9E5C-330D84A6682C}.Release|Any CPU.ActiveCfg = Release|Win32
+		{165C20BB-DBB3-446F-9E5C-330D84A6682C}.Release|x64.ActiveCfg = Release|x64
+		{165C20BB-DBB3-446F-9E5C-330D84A6682C}.Release|x64.Build.0 = Release|x64
+		{165C20BB-DBB3-446F-9E5C-330D84A6682C}.Release|x86.ActiveCfg = Release|Win32
+		{165C20BB-DBB3-446F-9E5C-330D84A6682C}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

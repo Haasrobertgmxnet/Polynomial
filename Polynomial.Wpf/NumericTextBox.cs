@@ -27,8 +27,15 @@ namespace Polynomial.Wpf
             {
                 foreach (char charItem in e.Text)
                 {
-                    string s = tBox.Text + e.Text;
-                    e.Handled = !(Double.TryParse(s, out double res) || s == "-");
+                    bool bl = true;
+                    bl = bl && Double.TryParse(tBox.Text == string.Empty?"0": tBox.Text, out double res);
+                    bl = bl && ("0123456789,.-").Contains(e.Text);
+                    e.Handled = !bl;
+                    //string s = tBox.Text + e.Text;
+                    //string s = tBox.Text;// + charItem;
+                    //string s = charItem + tBox.Text;
+                    //e.Handled = !(Double.TryParse(s, out double res) || s == "-");
+                    //e.Handled = !(Double.TryParse(s, out double res)) && s == "-";
                 }
             }
         }
