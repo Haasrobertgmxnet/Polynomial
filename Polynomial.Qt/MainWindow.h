@@ -2,8 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#define POLYNOMIAL_NOLIB 1
-#include "..\Polynomial.Dll\Polynomial.h"
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }

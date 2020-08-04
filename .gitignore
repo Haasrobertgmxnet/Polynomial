@@ -338,4 +338,17 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+/Release_Python
+Debug_Python
 Release_Python
+Polynomial.Python.Test
+/Polynomial.Python.Test
+/Polynomial.Python3.App/env2
+/Polynomial.Python3.App/env
+/Polynomial.Python3.App/env1
+env2
+env
+env1
+/Polynomial.Python3.App/dist
+/Polynomial.Python3.App/build
+/Polynomial.Python3.App/Polynomial.Python3.App.spec

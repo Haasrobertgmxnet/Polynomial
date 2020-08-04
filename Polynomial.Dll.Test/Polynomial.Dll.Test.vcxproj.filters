@@ -20,7 +20,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Polynomial.cpp">
+    <ClCompile Include="..\Polynomial.Core.Test\main.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>

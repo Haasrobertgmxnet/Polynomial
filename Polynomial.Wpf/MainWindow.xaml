@@ -7,8 +7,17 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <StackPanel>
-        <Label TextElement.FontSize="24" Content="Löser für eine Gleichung vierten Grades" />
-        <Label TextElement.FontSize="20" Content="A*z^4+B*z^3+C*z^2+D*z^1+E*z^0=0" />
+        <TextBlock FontFamily="Segoe UI" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center">
+            Löser für eine Gleichung vierten Grades
+        </TextBlock>
+        <TextBlock FontFamily="Segoe UI" FontSize="20" HorizontalAlignment="Center">
+            A*z<Run Typography.Variants="Superscript">4</Run>
+            +B*z<Run Typography.Variants="Superscript">3</Run>
+            +C*z<Run Typography.Variants="Superscript">2</Run>
+            +D*z
+            +E
+            = 0
+        </TextBlock>
         <Grid x:Name="InputCoefficients">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*" />
@@ -24,32 +33,32 @@
                 <RowDefinition Height="1*" />
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
-            
-            <Label Grid.Row="0">Koeffizient vor z^4: </Label>
+
+            <Label Grid.Row="0">Koeffizient A: </Label>
             <Label Grid.Row="0" Grid.Column="1">Realteil:</Label>
             <Label Grid.Row="0" Grid.Column="3">Imaginärteil:</Label>
             <TextBox Grid.Row="0" Grid.Column="2" x:Name="coefficientARe" local:NumericTextBox.IsEnabled="True" Text="0,0" Grid.ColumnSpan="2" AcceptsReturn="True" HorizontalAlignment="Left" Height="23" Margin="4" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
             <TextBox Grid.Row="0" Grid.Column="4" x:Name="coefficientAIm" local:NumericTextBox.IsEnabled="True" Text="0,0" Grid.ColumnSpan="2" AcceptsReturn="True" HorizontalAlignment="Left" Height="23" Margin="4" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
 
-            <Label Grid.Row="1">Koeffizient vor z^3:</Label>
+            <Label Grid.Row="1">Koeffizient B:</Label>
             <Label Grid.Row="1" Grid.Column="1">Realteil:</Label>
             <Label Grid.Row="1" Grid.Column="3">Imaginärteil:</Label>
             <TextBox Grid.Row="1" Grid.Column="2" x:Name="coefficientBRe" local:NumericTextBox.IsEnabled="True" Text="0,0" AcceptsReturn="True" HorizontalAlignment="Left" Height="23" Margin="4" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
             <TextBox Grid.Row="1" Grid.Column="4" x:Name="coefficientBIm" local:NumericTextBox.IsEnabled="True" Text="0,0" Grid.ColumnSpan="2" AcceptsReturn="True" HorizontalAlignment="Left" Height="23" Margin="4" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
 
-            <Label Grid.Row="2">Koeffizient vor z^2:</Label>
+            <Label Grid.Row="2">Koeffizient C:</Label>
             <Label Grid.Row="2" Grid.Column="1">Realteil:</Label>
             <Label Grid.Row="2" Grid.Column="3">Imaginärteil:</Label>
             <TextBox Grid.Row="2" Grid.Column="2" x:Name="coefficientCRe" local:NumericTextBox.IsEnabled="True" Text="0,0" Grid.ColumnSpan="2" AcceptsReturn="True" HorizontalAlignment="Left" Height="23" Margin="4" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
             <TextBox Grid.Row="2" Grid.Column="4" x:Name="coefficientCIm" local:NumericTextBox.IsEnabled="True" Text="0,0" AcceptsReturn="True" HorizontalAlignment="Left" Height="23" Margin="4" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
 
-            <Label Grid.Row="3">Koeffizient vor z^1:</Label>
+            <Label Grid.Row="3">Koeffizient D:</Label>
             <Label Grid.Row="3" Grid.Column="1">Realteil:</Label>
             <Label Grid.Row="3" Grid.Column="3">Imaginärteil:</Label>
             <TextBox Grid.Row="3" Grid.Column="2" x:Name="coefficientDRe" local:NumericTextBox.IsEnabled="True" Text="0,0" Grid.ColumnSpan="2" AcceptsReturn="True" HorizontalAlignment="Left" Height="23" Margin="4" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
             <TextBox Grid.Row="3" Grid.Column="4" x:Name="coefficientDIm" local:NumericTextBox.IsEnabled="True" Text="0,0" Grid.ColumnSpan="2" AcceptsReturn="True" HorizontalAlignment="Left" Height="23" Margin="4" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
 
-            <Label Grid.Row="4">Koeffizient vor z^0:</Label>
+            <Label Grid.Row="4">Koeffizient E:</Label>
             <Label Grid.Row="4" Grid.Column="1">Realteil:</Label>
             <Label Grid.Row="4" Grid.Column="3">Imaginärteil:</Label>
             <TextBox Grid.Row="4" Grid.Column="2" x:Name="coefficientERe" local:NumericTextBox.IsEnabled="True" Text="0,0" Grid.ColumnSpan="2" AcceptsReturn="True" HorizontalAlignment="Left" Height="23" Margin="4" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
