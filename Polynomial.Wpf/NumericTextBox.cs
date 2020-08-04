@@ -25,17 +25,19 @@ namespace Polynomial.Wpf
             var tBox = sender as TextBox;
             if (GetIsEnabled((TextBox)sender))
             {
+                var hasMoreThanOneMinusSign = false;
+                var hasMoreThanOneDecimalSign = false;
                 foreach (char charItem in e.Text)
                 {
-                    bool bl = true;
-                    bl = bl && Double.TryParse(tBox.Text == string.Empty?"0": tBox.Text, out double res);
-                    bl = bl && ("0123456789,.-").Contains(e.Text);
-                    e.Handled = !bl;
-                    //string s = tBox.Text + e.Text;
-                    //string s = tBox.Text;// + charItem;
-                    //string s = charItem + tBox.Text;
-                    //e.Handled = !(Double.TryParse(s, out double res) || s == "-");
-                    //e.Handled = !(Double.TryParse(s, out double res)) && s == "-";
+                    hasMoreThanOneMinusSign = e.Text == "-" && tBox.Text.Contains("-");
+                    hasMoreThanOneDecimalSign = (",.").Contains(e.Text) && (tBox.Text.Contains(",") || tBox.Text.Contains("."));
+                    var textBoxContentIsValid = Double.TryParse(tBox.Text, out double res);
+                    textBoxContentIsValid = textBoxContentIsValid || (".").Contains(tBox.Text) || (",").Contains(tBox.Text) || ("-").Contains(tBox.Text);
+                    textBoxContentIsValid = textBoxContentIsValid || ("-.").Contains(tBox.Text) || ("-,").Contains(tBox.Text);
+                    var newCharacterIsValid = true;
+                    newCharacterIsValid = newCharacterIsValid && textBoxContentIsValid;
+                    newCharacterIsValid = newCharacterIsValid && ("0123456789,.-").Contains(e.Text);
+                    e.Handled = !newCharacterIsValid || hasMoreThanOneMinusSign || hasMoreThanOneDecimalSign;
                 }
             }
         }

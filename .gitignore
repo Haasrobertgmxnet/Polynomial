@@ -349,3 +349,6 @@ Polynomial.Python.Test
 env2
 env
 env1
+/Polynomial.Python3.App/dist
+/Polynomial.Python3.App/build
+/Polynomial.Python3.App/Polynomial.Python3.App.spec
